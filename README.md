@@ -1,4 +1,4 @@
-#Reactnd-readable
+# Reactnd-readable
 
 ### Thoughts on designing client model in redux store
 Based on requirement we can easily know that there are four important metrics that plays in model design.
