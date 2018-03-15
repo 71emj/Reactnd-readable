@@ -8,7 +8,8 @@ In a relational world the relationship between these metrics can be described as
 * Author.hasMany(Post)
 * Author.hasMany(Comment)
 * Post.hasMany(Comment)
-or in reverse
+
+Or in reverse
 * Post.hasOne(Category)
 * Post.hasOne(Author)
 * Comment.hasOne(Author)
