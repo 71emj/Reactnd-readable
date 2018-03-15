@@ -1,12 +1,23 @@
-#Reactnd-readable
+# Reactnd-readable
 
-### Thoughts on designing client model in redux store
-Based on requirement we can easily know that there are four important metrics that plays in model design.
-In order to maximize the relationship between each of these metrics we can simply listed out as following:
-The four metrics are "category", "post", "author", and "comment":
+### Thoughts on designing client model with redux store
+Based on requirement we can easily know that there are four important metrics, "category", "post", "author", and "comment", that plays in the model design.
+
+In a relational world the relationship between these metrics can be described as following:
+* Category.hasMany(Post)
+* Author.hasMany(Post)
+* Author.hasMany(Comment)
+* Post.hasMany(Comment)
+or in reverse
+* Post.hasOne(Category)
+* Post.hasOne(Author)
+* Comment.hasOne(Author)
+* Comment.hasOne(Post)
+
+With the relationship map out we can easily design our model to look something like this,
 ```js
-model: {
-  category: { // by category type
+store: {
+  categories: { // by category type
     "politics": {
       category: "politics",
       number: Number,
@@ -24,7 +35,7 @@ model: {
     }
     ...
   },
-  post: { // by postID
+  posts: { // by postID
     "pid01": {
       id: "pid01",
       body: "lorem ipsum",
@@ -45,7 +56,7 @@ model: {
     },
     ...
   },
-  author: { // by userID or username
+  authors: { // by userID or username
     "71emj": {
       id: "71emj",
       posts: [ ... ],
