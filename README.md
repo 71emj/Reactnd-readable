@@ -19,72 +19,47 @@ With the relationship map out we can easily design our model to look something l
 ```js
 store: {
   categories: { // by category type
-    "politics": {
-      category: "politics",
-      number: Number,
-      postID: [ ... ]
+    "all" : {
+      name: String,
+      path: "categories",
+      posts: Set // contains all posts regardless of category
     },
-    "technology": {
-      category: "technology",
-      number: Number,
-      postID: [ ... ]
+    "react": {
+      name: String,
+      path: String,
+      posts: Set
     },
-    "sports": {
-      category: "sports",
-      number: Number,
-      postID: [ ... ]
-    }
     ...
   },
   posts: { // by postID
     "pid01": {
-      id: "pid01",
-      body: "lorem ipsum",
-      author: "71emj",
-      category: "sports",
-      comments: [ ... ],
-      upvotes: Number,
-      timestamp: Date.now()
-    },
-    "pid02": {
-      id: "pid02",
-      body: "lorem ipsum",
-      author: "71emj",
-      category: "technology",
-      comments: [ ... ],
-      upvotes: Number,
+      id: UUID,
+      title: String,
+      body: String,
+      author: String,
+      category: String,
+      comments: Set,
+      upVotes: Number,
       timestamp: Date.now()
     },
     ...
   },
   authors: { // by userID or username
     "71emj": {
-      id: "71emj",
-      posts: [ ... ],
-      comments: [ ... ]
-    },
-    "timjeng": {
-      id: "timjeng",
-      posts: [ ... ],
-      comments: [ ... ]
+      id: String,
+      posts: Set,
+      comments: Set
     },
     ...
   },
   comments: { // by commentID
     "cid01": {
-      id: "cid01",
-      body: "lorem ipsum",
-      author: "71emj",
-      post: "pid01",
-      upvotes: Number,
-      timestamp: Date.now()
-    },
-    "cid02": {
-      id: "cid02",
-      body: "lorem ipsum",
-      author: "timjeng",
-      post: "pid01",
-      upvotes: Number,
+      id: UUID,
+      title: String,
+      body: String,
+      author: String,
+      post: UUID,
+      upVotes: Number,
       timestamp: Date.now()
     },
     ...
