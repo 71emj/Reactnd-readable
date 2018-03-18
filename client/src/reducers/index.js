@@ -1,11 +1,9 @@
-import init from "../util/Initialize";
 import readablePost from "./post";
 import readableComment from "./comment";
 import readableCategory from "./category";
 
 const initialState = {
   query: "",
-  test: new Set(["hello", "world"]),
   models: {}
 };
 
@@ -13,7 +11,6 @@ function readableApp(state = initialState, action) {
   const type = action.type.replace(/^\w+\_/, "");
   switch(type) {
     case "MODELS":
-      console.log(action.models)
       return {
         ...state,
         models: action.models

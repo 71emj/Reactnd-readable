@@ -17,13 +17,14 @@ export function addPost({ author, category, title, body }) {
   };
 }
 
-export function putPost({ id, category, title, body }) {
+export function putPost({ id, category, title, body, voteScore }) {
   return {
     type: EDIT_POST,
     id,
     category,
     title,
     body,
+    voteScore,
     timestamp: Date.now()
   };
 }

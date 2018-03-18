@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { initialize, comment } from "../actions";
-import logo from '../logo.svg';
-import Comment from "./Comment";
+import { initialize, comment } from "./actions";
+import PostPage from "./routes/PostPage";
 import './App.css';
 
 class App extends Component {
@@ -19,8 +18,8 @@ class App extends Component {
     console.log(this.props);
     return (
       <div className="App">
-        <h1 onClick={this.testDelete}>Hello World</h1>
-        <Comment></Comment>
+        {/* should read from url */}
+        <PostPage postId="8xf0y6ziyjabvozdd253nd" />
       </div>
     );
   }

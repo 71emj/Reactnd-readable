@@ -1,5 +1,4 @@
 import React from "react";
-import { }
 
 const preventDefault = evt => evt.preventDefault();
 const Input = props =>
@@ -16,4 +15,4 @@ const Input = props =>
     value={props.children || props.value || ""}
   />
 
-export Input;
+export default Input;
