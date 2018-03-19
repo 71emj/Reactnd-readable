@@ -1,3 +1,4 @@
+import clone from "clone";
 import readablePost from "./post";
 import readableComment from "./comment";
 import readableCategory from "./category";
@@ -9,6 +10,7 @@ const initialState = {
 
 function readableApp(state = initialState, action) {
   const type = action.type.replace(/^\w+\_/, "");
+  const models = clone(state.models);
   switch(type) {
     case "MODELS":
       return {
@@ -18,17 +20,17 @@ function readableApp(state = initialState, action) {
     case "POST":
       return {
         ...state,
-        models: readablePost(state.models, action)
+        models: readablePost(models, action)
       };
     case "COMMENT":
       return {
         ...state,
-        models: readableComment(state.models, action)
+        models: readableComment(models, action)
       };
     case "CATEGORY":
       return {
         ...state,
-        models: readableCategory(state.models, action)
+        models: readableCategory(models, action)
       }
     default:
       return state;

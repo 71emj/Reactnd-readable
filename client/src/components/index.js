@@ -1,5 +1,5 @@
 import Author from "./Author";
-import Comment from "./Comment";
+import Comment from "./CommentSection";
 import FeedBack from "./FeedBack";
 import Form from "./Form";
 import Input from "./Input";

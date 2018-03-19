@@ -1,47 +1,47 @@
-import clone from "clone";
 import curry from "lodash.curry";
 import { post } from "../actions";
+import { Helpers } from "../util";
 const { CREATE_POST, EDIT_POST, DELETE_POST } = post;
 
-const addRemove = (models, id, method, category, author) => {
-  models.Author[author].posts[method](id);
-  models.Category["all"].posts[method](id);
-  models.Category[category].posts[method](id);
-  return models;
-}
-
-function readablePost(state = {}, action) {
-  const models = clone(state);
+function readablePost(models = {}, action) {
   const { type, id, category, author } = action;
-  const { author: writer, category: kind, comments } = models.Post[id];
+  const { Author: auth, Category: cat, Post } = Helpers.modelAPI(models);
+  const { author: writer, category: kind, comments } = Post(id)[id];
 
-  const modPost = curry(addRemove(models)(id));
-  const adder = modPost("add")(category);
-  const remover = modPost("delete")(kind);
+  const addRemove = (models, id, method, category, author) => {
+    const Author = auth(author);
+    const Category = cat(category);
+    Author[author].posts[method](id);
+    Category[category].posts[method](id);
+    Category["all"].posts[method](id);
+    return { ...models, Author, Category };
+  }
+
+  const modPost = curry(addRemove)(models)(id);
 
   switch(type) {
     case CREATE_POST: {
-      const addPost = adder(author);
-      models.Post[id] = { ...action };
-      delete models.Post[id][type];
-      return { ...addPost };
+      const create = modPost("add")(category)(author);
+      create.Post[id] = { ...action };
+      delete create.Post[id]["type"];
+      return { ...create };
     }
     case EDIT_POST: {
-      const updatePost = adder(writer);
+      const update = modPost("add")(category)(writer);
       const { title, body, voteScore } = action;
-      models.Post[id] = { ...models.Post[id], category, body, title, voteScore };
-      models.Category[kind].posts.delete(id);
-      return { ...updatePost };
+      update.Post[id] = { ...Post(id)[id], category, body, title, voteScore };
+      update.Category[kind].posts.delete(id);
+      return { ...update };
     }
     case DELETE_POST: {
-      const delPost = remover(writer);
+      const remove = modPost("delete")(kind)(writer);
       comments.forEach(
-        id => models.Comment[id].parentDeleted = true);
-      delete models.Post[id];
-      return { ...delPost }
+        id => remove.Comment[id].parentDeleted = true);
+      delete remove.Post[id];
+      return { ...remove }
     }
     default:
-      return state;
+      return models;
   }
 }
 

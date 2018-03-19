@@ -1,27 +1,27 @@
 import ShortID from "shortid";
+import { Boiler } from "../util";
 
 export const CREATE_COMMENT = "CREATE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
-export function addComment({ parentId, author, title, body }) {
+export function addComment({ parentId, author, body }) {
   const id = ShortID.generate();
+  const template = Boiler.comment(id);
   return {
     type: CREATE_COMMENT,
+    ...template,
     author,
-    parentId,
-    id,
-    title,
     body,
-    timestamp: Date.now()
+    parentId
   };
 }
 
-export function postComment({ id, text, body }) {
+export function putComment({ id, voteScore, body }) {
   return {
     type: EDIT_COMMENT,
     id,
-    text,
+    voteScore,
     body,
     timestamp: Date.now()
   };
