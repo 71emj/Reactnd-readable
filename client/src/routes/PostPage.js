@@ -20,7 +20,7 @@ const PostPage = props => {
         body={article && article.body}
       />
       <Container textAlign="right">
-        <FeedBack vote={props.update}
+        <FeedBack vote={props.create}
           voteScore={article && article.voteScore}
           target={article && article}
         />
@@ -33,8 +33,8 @@ const PostPage = props => {
 };
 
 const mapStateToProps = state => ({ ...state.models });
-const mapDispatchToProps = ({ addPost, putPost, delPost }) => dispatch => ({
-  create: bindActionCreators(addPost, dispatch),
+const mapDispatchToProps = ({ createPost, putPost, delPost }) => dispatch => ({
+  create: bindActionCreators(createPost, dispatch),
   update: bindActionCreators(putPost, dispatch),
   delete: bindActionCreators(delPost, dispatch)
 });

@@ -1,8 +1,8 @@
-import ajax from "./Ajax";
+import { get } from "./Ajax";
 
 function initializeStore() {
-  const getCategories = ajax.get("categories");
-  const getPosts = ajax.get("posts");
+  const getCategories = get("categories");
+  const getPosts = get("posts");
   const getComments = id => getPosts(id + "/comments");
 
   const Category = {
@@ -63,6 +63,7 @@ function initializeStore() {
     .then(comments => {
       const pids = Object.keys(Post);
       /* set comment to model */
+      console.log(comments);
       const Comment = comments.reduce((Comment, com) => {
         const pid = pids.find(key => key === (com[0] && com[0].parentId));
         if (pid) {

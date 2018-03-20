@@ -23,7 +23,7 @@ export function parseTimestamp(unix) {
   const timeDiff = unixToMin(now) - unixToMin(unix);
   const hour = 60 * 60;
   if (timeDiff < 24 * hour) {
-    return timeDiff <= hour ? "Just now" : `${~~timeDiff * hour} hours ago`;
+    return timeDiff <= hour ? "Just now" : `${~~(timeDiff / hour)} hours ago`;
   }
   const convert = new Date(unix);
   return convert.toUTCString().match(/^([\w\s,]+)\s\d{2}:/)[1];
@@ -31,8 +31,8 @@ export function parseTimestamp(unix) {
 
 export function voteArticle({ voteScore, target, vote }) {
   return evt => {
-    const value = voteScore + ~~evt.target.dataset["value"];
-    const update = { ...target, voteScore: value };
+    const voteType = ~evt.target.dataset["value"] ? "upVote" : "downVote";
+    const update = { ...target, voteScore: voteType };
     return vote(update);
   }
 }

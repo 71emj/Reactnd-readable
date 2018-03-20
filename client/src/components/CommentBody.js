@@ -5,16 +5,16 @@ import { Gap } from "./utilities";
 import { Helpers } from "../util";
 
 const CommentBody = props => {
-  const { action, comment } = props;
+  const { edit, vote, comment } = props;
   const { author, body, timestamp: t, voteScore } = comment;
   const avatar = Helpers.dummyAvatar(author);
   const voteComment = Helpers.voteArticle({
     target: comment,
-    vote: action,
+    vote,
     voteScore
   });
   const editComment = evt => {
-    props.action({
+    props.edit({
       ...props.comment,
       body: "Comments are cool, and I just changed it"
     });

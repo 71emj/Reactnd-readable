@@ -6,11 +6,18 @@ window.localStorage.setItem("udacity-uuid", AUTH_TOKEN);
 axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.interceptors.response.use(res => res.data, err => Promise.reject(err));
 
-function get(path) {
+export function get(path) {
   return (subpath = "") => axios.get("/" + path + "/" + subpath);
+}
+
+export function post(path) {
+  return (subpath = "") =>
+    payload => axios.post("/" + path + "/" + subpath, payload);
 }
 
 
 
-
-export default { get };
+// POST /posts
+// POST /posts/:id
+// POST /comments
+// POST /comments/:id

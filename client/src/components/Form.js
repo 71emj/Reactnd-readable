@@ -42,7 +42,7 @@ const CustomForm = props => {
   const formCreator = fetchPresets(props);
   const { meta, selectOptions } = formCreator;
   return (
-    <Form onSubmit={props.submit}>
+    <Form onSubmit={props.submit} >
       <Form.Group children={meta.map((field, i) =>
           <Form.Field key={i} width="four">
             <label>{Helpers.toTitleCase(field.name)}</label>
@@ -51,7 +51,7 @@ const CustomForm = props => {
       )}/>
       <Form.TextArea name="body" style={{ minHeight: "10rem" }}
         label={props.type.name} placeholder={props.type.placeholder} />
-      <Form.Button  loading={props.submitting}>Submit</Form.Button>
+      <Form.Button loading={props.submitting}>Submit</Form.Button>
     </Form>
   );
 }

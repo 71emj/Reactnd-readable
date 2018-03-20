@@ -27,13 +27,12 @@ const CommentSection = props => {
   }
   return (
     <div>
-      <Comment.Group>
-        {comments.map((id, i) => (
-          <CommentBody key={i}
-            comment={props.Comment[id]}
-            action={props.update}
-          />
-        ))}
+      <Comment.Group>{comments.map((id, i) => (
+        <CommentBody key={i}
+          comment={props.Comment[id]}
+          edit={props.update}
+          vote={props.create}
+        ></CommentBody>))}
       </Comment.Group>
       <Gap size="2rem"/>
       <Header>
@@ -53,9 +52,9 @@ const CommentSection = props => {
 };
 
 const mapStateToProps = state => ({ ...state.models });
-const mapDispatchToProps = ({addComment, putComment, delComment}) =>
+const mapDispatchToProps = ({createComment, putComment, delComment}) =>
   dispatch => ({
-    create: bindActionCreators(addComment, dispatch),
+    create: bindActionCreators(createComment, dispatch),
     update: bindActionCreators(putComment, dispatch),
     delete: bindActionCreators(delComment, dispatch)
   });
