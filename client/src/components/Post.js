@@ -6,11 +6,12 @@ import { Gap, Paragraph } from "./utilities";
 const TextBody = props => {
   return (
     <div>
-      <Gap size="5rem" />
+      <Gap size="1rem" />
       <Header as="h1">
         {props.title ||
           `OOps it seems like we don't have content...`
         }
+        <Gap size="0.5rem" />
         <Divider />
         <Gap size="1rem" />
         <Header.Subheader children={

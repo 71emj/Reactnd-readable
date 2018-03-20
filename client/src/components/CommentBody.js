@@ -29,7 +29,11 @@ const CommentBody = props => {
           <Gap />
           vote: {voteScore} |
           <Gap />
-          <Icon name={!voteScore ? "meh" : voteScore > 0 ? "smile" : "frown"} />
+          <Icon className="outline" name={`${!voteScore
+            ? "meh"
+            : voteScore > 0
+            ? "smile"
+            : "frown"}`} />
         </Comment.Metadata>
         <Comment.Text>{body}</Comment.Text>
         <Comment.Actions>

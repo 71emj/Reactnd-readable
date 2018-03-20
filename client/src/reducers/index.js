@@ -9,7 +9,7 @@ const initialState = {
 };
 
 function readableApp(state = initialState, action) {
-  const type = action.type.replace(/^\w+\_/, "");
+  const type = action.type.replace(/^\w+_/, "");
   const models = clone(state.models);
   switch(type) {
     case "MODELS":

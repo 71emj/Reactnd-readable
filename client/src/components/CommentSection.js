@@ -1,9 +1,10 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Grid, Comment } from "semantic-ui-react";
+import { Grid, Comment, Divider, Header } from "semantic-ui-react";
 import { comment } from "../actions";
 import CommentBody from "./CommentBody";
+import { Gap } from "./utilities";
 import Form from "./Form";
 
 const type = {
@@ -34,11 +35,19 @@ const CommentSection = props => {
           />
         ))}
       </Comment.Group>
+      <Gap size="2rem"/>
+      <Header>
+        Leave a comment:
+      </Header>
+      <Divider />
+      <Gap size="0.5rem"/>
       <Form purpose="comment"
         submit={createComment}
         submitting={false}
         type={type}
       />
+      <Gap size="1rem"/>
+      <Divider />
     </div>
   );
 };

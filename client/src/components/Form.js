@@ -2,11 +2,6 @@ import React from "react";
 import { Form, Input, Select } from "semantic-ui-react";
 import { Helpers } from "../util";
 
-const categories = [
-  { key: "1", "text": "hello", "value": "hello" },
-  { key: "2", "text": "hello", "value": "hello" }
-]
-
 const presets = {
   "default": {
     meta: [],

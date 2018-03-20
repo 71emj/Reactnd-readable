@@ -21,19 +21,17 @@ export function parseTimestamp(unix) {
   const now = Date.now();
   const unixToMin = unix => unix / 1000 | 0;
   const timeDiff = unixToMin(now) - unixToMin(unix);
-  // set a guard, if within 24 hour show hour timestamp
   const hour = 60 * 60;
   if (timeDiff < 24 * hour) {
-    console.log(timeDiff);
     return timeDiff <= hour ? "Just now" : `${~~timeDiff * hour} hours ago`;
   }
   const convert = new Date(unix);
-  return convert.toUTCString().match(/^([\w\s,]+)\s\d{2}\:/)[1];
+  return convert.toUTCString().match(/^([\w\s,]+)\s\d{2}:/)[1];
 }
 
 export function voteArticle({ voteScore, target, vote }) {
   return evt => {
-    const value = ~~voteScore + ~~evt.target.dataset["value"];
+    const value = voteScore + ~~evt.target.dataset["value"];
     const update = { ...target, voteScore: value };
     return vote(update);
   }

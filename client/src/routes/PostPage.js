@@ -13,6 +13,7 @@ const PostPage = props => {
   console.log(article);
   return (
     <Container text textAlign="left">
+      <Util.Gap size="7rem" />
       <Post
         author={article && article.author}
         title={article && article.title}
@@ -26,6 +27,7 @@ const PostPage = props => {
       </Container>
       <Util.Gap size="2rem" />
       <Comment parentId={id} comments={article && article.comments} />
+      <Util.Gap size="7rem" />
     </Container>
   );
 };
