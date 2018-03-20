@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { initialize, comment } from "./actions";
 import { NavBar } from "./components";
 import PostPage from "./routes/PostPage";
-import './App.css';
+import "./App.css";
 
 class App extends Component {
   componentDidMount() {
     this.props.setup();
-  }
-
-  testDelete = evt => {
-    this.props.delTest({ id: "894tuq4ut84ut8v4t8wun89g" });
   }
 
   render() {
@@ -20,9 +18,13 @@ class App extends Component {
 
     return (
       <div className="App">
-        <NavBar />
-        {/* should read from url */}
-        <PostPage postId="8xf0y6ziyjabvozdd253nd" />
+        <Route path="*" component={NavBar} />
+        <Switch>
+          {/* should read from url */}
+          <Route path="/post" render={props => (
+            <PostPage {...props} />
+          )}/>
+        </Switch>
       </div>
     );
   }
@@ -33,10 +35,12 @@ const mapDispatchToProps = initialize =>
   dispatch => ({
     setup: bindActionCreators(initialize, dispatch),
     delTest: bindActionCreators(comment.delComment, dispatch)
-  })
+  });
 const initStore = initialize.initializeStore;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps(initStore)
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps(initStore)
+  )(App)
+);

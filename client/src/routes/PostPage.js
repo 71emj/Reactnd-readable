@@ -8,9 +8,9 @@ import { Post, FeedBack, Comment, Util } from "../components";
 const PostPage = props => {
   // atm, postId is hard coded in props, next step is create url query
   // in route so that PostPage can analyze query and use it to access store
-  const { postId: id } = props;
+  const { search } = props.location;
+  const id = search ? search.match(/=(.*)$/)[1] : null;
   const article = props.Post ? props.Post[id] : null;
-  console.log(article);
   return (
     <Container text textAlign="left">
       <Util.Gap size="7rem" />
@@ -33,10 +33,11 @@ const PostPage = props => {
 };
 
 const mapStateToProps = state => ({ ...state.models });
-const mapDispatchToProps = ({ createPost, putPost, delPost }) => dispatch => ({
-  create: bindActionCreators(createPost, dispatch),
-  update: bindActionCreators(putPost, dispatch),
-  delete: bindActionCreators(delPost, dispatch)
-});
+const mapDispatchToProps = ({ createPost, putPost, delPost }) =>
+  dispatch => ({
+    create: bindActionCreators(createPost, dispatch),
+    update: bindActionCreators(putPost, dispatch),
+    delete: bindActionCreators(delPost, dispatch)
+  });
 
 export default connect(mapStateToProps, mapDispatchToProps(post))(PostPage);

@@ -14,10 +14,3 @@ export function post(path) {
   return (subpath = "") =>
     payload => axios.post("/" + path + "/" + subpath, payload);
 }
-
-
-
-// POST /posts
-// POST /posts/:id
-// POST /comments
-// POST /comments/:id

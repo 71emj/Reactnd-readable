@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container, Menu, Dropdown, Icon } from "semantic-ui-react";
+import { Helpers } from "../util";
 
 const Navbar = props => {
+  const { history, location } = props;
   const borderLess = {
     borderRadius: "0"
   };
@@ -16,11 +19,15 @@ const Navbar = props => {
   return (
     <Menu inverted compact borderless fixed="top" style={borderLess} color="violet">
       <Container>
-        <Menu.Item link header as="h3" name="MyReads" />
+        <Link to="/" children={
+          <Menu.Item link header as="h3" name="MyReads" />} />
         <Menu.Menu position="right">
           <Menu.Item link>
             <Icon name="compose" />
-            Add Post
+            <Link to={{
+              pathname: "/post",
+              search: Helpers.stringifyQuery({ pid: "8xf0y6ziyjabvozdd253nd" })
+            }}>Add Post</Link>
           </Menu.Item>
           <Menu.Item link>
             <Icon name="filter" />
