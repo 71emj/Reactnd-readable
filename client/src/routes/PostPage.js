@@ -1,32 +1,37 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { Container } from "semantic-ui-react";
-import { post } from "../actions";
+import { Container, Divider } from "semantic-ui-react";
 import { Post, FeedBack, Comment, Util } from "../components";
+import { post } from "../actions";
 
 const PostPage = props => {
-  // atm, postId is hard coded in props, next step is create url query
-  // in route so that PostPage can analyze query and use it to access store
   const { search } = props.location;
   const id = search ? search.match(/=(.*)$/)[1] : null;
-  const article = props.Post ? props.Post[id] : null;
+  const article = props.Post ? props.Post[id] : {};
+  // flag for data, display loading
+  // when store is not initiated
+  // setup warning action
+  // whenever requested model, ex Post, for some reason
+  // doesn't exist, fix by fetching data from server
   return (
     <Container text textAlign="left">
-      <Util.Gap size="7rem" />
+      <Util.Gap size="8rem" />
       <Post
-        author={article && article.author}
-        title={article && article.title}
-        body={article && article.body}
+        author={article.author}
+        title={article.title}
+        body={article.body}
+        timestamp={article.timestamp}
       />
+      <Divider />
       <Container textAlign="right">
         <FeedBack vote={props.create}
-          voteScore={article && article.voteScore}
-          target={article && article}
+          voteScore={article.voteScore}
+          target={article}
         />
       </Container>
       <Util.Gap size="2rem" />
-      <Comment parentId={id} comments={article && article.comments} />
+      <Comment parentId={id} comments={article.comments} />
       <Util.Gap size="7rem" />
     </Container>
   );

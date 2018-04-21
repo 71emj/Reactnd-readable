@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { initialize, comment } from "./actions";
 import { NavBar } from "./components";
-import PostPage from "./routes/PostPage";
+import { PostPage, Dashboard } from "./routes";
 import "./App.css";
 
 class App extends Component {
@@ -15,12 +15,11 @@ class App extends Component {
 
   render() {
     console.log(this.props);
-
     return (
       <div className="App">
         <Route path="*" component={NavBar} />
         <Switch>
-          {/* should read from url */}
+          <Route exact path="/" component={Dashboard}/>
           <Route path="/post" render={props => (
             <PostPage {...props} />
           )}/>

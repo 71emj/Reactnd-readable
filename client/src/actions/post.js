@@ -26,6 +26,7 @@ export const createPost = payload =>
       return post(id)({ option: voteScore })
         .catch(console.error.bind(console))
         .then(updated => {
+          console.log(updated);
           dispatch(putPost(updated));
         });
     }

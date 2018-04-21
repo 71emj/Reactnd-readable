@@ -4,7 +4,7 @@ import { Container, Menu, Dropdown, Icon } from "semantic-ui-react";
 import { Helpers } from "../util";
 
 const Navbar = props => {
-  const { history, location } = props;
+  const { pathname } = props.location;
   const borderLess = {
     borderRadius: "0"
   };
@@ -22,16 +22,22 @@ const Navbar = props => {
         <Link to="/" children={
           <Menu.Item link header as="h3" name="MyReads" />} />
         <Menu.Menu position="right">
+          {pathname.match(/\//g).length > 1 &&
+            <Menu.Item link float="right">
+              <Icon name="dashboard" />
+              <Link to="/">Dashboard</Link>
+            </Menu.Item>
+          }
           <Menu.Item link>
-            <Icon name="compose" />
+            <Icon name="pencil" />
             <Link to={{
-              pathname: "/post",
+              pathname: "./post",
               search: Helpers.stringifyQuery({ pid: "8xf0y6ziyjabvozdd253nd" })
             }}>Add Post</Link>
           </Menu.Item>
           <Menu.Item link>
             <Icon name="filter" />
-            <Dropdown text="Filter By">
+            <Dropdown text="Sort By">
               <Dropdown.Menu style={{ ...borderLess, ...top }} defaultValue={options[0]}>
                 <Dropdown.Header>Sort Content</Dropdown.Header>
                 <Dropdown.Divider />

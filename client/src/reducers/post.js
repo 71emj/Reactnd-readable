@@ -30,7 +30,8 @@ function readablePost(models = {}, action) {
       const update = modPost("add")(category)(writer);
       const { title, body, voteScore } = action;
       update.Post[id] = { ...Post(id)[id], category, body, title, voteScore };
-      update.Category[kind].posts.delete(id);
+      // update.Category[kind].posts.delete(id);
+      // need to check if it's the same as it's previous state
       return { ...update };
     }
     case DELETE_POST: {
