@@ -45,7 +45,6 @@ const CommentSection = props => {
         submitting={false}
         type={type}
       />
-      <Gap size="1rem"/>
       <Divider />
     </div>
   );

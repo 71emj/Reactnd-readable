@@ -16,7 +16,6 @@ const PostPage = props => {
   // doesn't exist, fix by fetching data from server
   return (
     <Container text textAlign="left">
-      <Util.Gap size="8rem" />
       <Post
         author={article.author}
         title={article.title}
@@ -32,7 +31,6 @@ const PostPage = props => {
       </Container>
       <Util.Gap size="2rem" />
       <Comment parentId={id} comments={article.comments} />
-      <Util.Gap size="7rem" />
     </Container>
   );
 };

@@ -6,6 +6,7 @@ import Input from "./Input";
 import NavBar from "./NavBar";
 import Post from "./Post";
 import Preview from "./Preview";
+import Footer from "./Footer";
 import * as Util from "./utilities";
 
-export { Author, Comment, FeedBack, Form, Input, NavBar, Post, Preview, Util };
+export { Author, Comment, FeedBack, Form, Input, NavBar, Post, Preview, Footer, Util };
